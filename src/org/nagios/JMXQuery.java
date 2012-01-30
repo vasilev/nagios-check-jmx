@@ -159,9 +159,24 @@ public class JMXQuery {
 		if(infoData!=null){
 			if(infoData instanceof CompositeDataSupport)
 				report((CompositeDataSupport)infoData, out);
-			else
-				out.print(infoData.toString());
-		}
+      else {
+        if (infoData instanceof String[]) {
+          String FS = ", ";
+          String[] strings = (String[]) infoData;
+          StringBuilder sb = new StringBuilder();
+          sb.append(" [");
+          for (String s : strings) {
+            sb.append(s);
+            sb.append(FS);
+          }
+          if (sb.length() > 4) sb.setLength(sb.length() - FS.length());
+          sb.append("]");
+          out.print(sb.toString());
+        } else {
+          out.print(infoData.toString());
+        }
+      }
+    }
 		
 		out.println();
 		return status;
