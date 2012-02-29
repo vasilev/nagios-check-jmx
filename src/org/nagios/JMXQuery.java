@@ -166,10 +166,12 @@ public class JMXQuery {
           StringBuilder sb = new StringBuilder();
           sb.append(" [");
           for (String s : strings) {
+            sb.append("\"");
             sb.append(s);
+            sb.append("\"");
             sb.append(FS);
           }
-          if (sb.length() > 4) sb.setLength(sb.length() - FS.length());
+          if (sb.length() > 5) sb.setLength(sb.length() - FS.length());
           sb.append("]");
           out.print(sb.toString());
         } else {
